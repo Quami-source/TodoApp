@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {View, Text} from 'react-native';
 import {MyContext} from './components/MyContext';
 import HomeScreen from './screens/HomeScreen';
 import CreateNote from './screens/CreateNote';
@@ -21,6 +21,10 @@ const App = () => {
   //state values\
   const todoReducer = (state, action) => {
     switch (action.type) {
+      case 'CHECK':
+        return {
+          isEmpty: true,
+        };
       case 'ADD':
         return {
           isEmpty: false,
@@ -55,7 +59,11 @@ const App = () => {
   // use the useEffect hook to get the size of the
   //array, if the size is zero, display splashscreen
   //else display the content of the array
-  React.useEffect(() => {}, []);
+  React.useEffect(() => {
+    if (TodoArray.length == 0) {
+      dispatch({type: 'CHECK'});
+    }
+  }, []);
 
   return (
     <MyContext.Provider value={todoContext}>
@@ -70,7 +78,13 @@ const App = () => {
               },
             }}
           />
-          <Stack.Screen name="Add" component={CreateNote} />
+          <Stack.Screen
+            name="Add"
+            component={CreateNote}
+            options={{
+              headerRight: (props) => <HeaderRightIcon {...props} />,
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </MyContext.Provider>

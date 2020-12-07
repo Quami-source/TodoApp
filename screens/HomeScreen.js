@@ -3,6 +3,7 @@ import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
+  Image,
   View,
   Text,
   StatusBar,
@@ -17,36 +18,45 @@ import TodoArray from '../Todos';
 const height = Dimensions.get('screen').height;
 const width = Dimensions.get('window').width;
 
-const HomeScreen = ({route, navigation}) => {
+const HomeScreen = ({route, navigation}, props) => {
   //const {title, body} = route.params;
   //const [notes, setNotes] = useState([{title: title, body: body}]);
   //context
+  //console.log(TodoArray.length);
 
   return (
     <SafeAreaView>
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
       <View style={styles.container}>
-        <View>
-          {TodoArray.map((todos) => {
-            return (
-              <View key={todos.id}>
-                <Text>{todos.title}</Text>
-                <Text>{todos.body}</Text>
-              </View>
-            );
-          })}
-        </View>
+        {TodoArray.length == 0 ? (
+          <View style={styles.imageContainer}>
+            <Image
+              source={require('../src/notetaking.gif')}
+              resizeMode="cover"
+            />
+          </View>
+        ) : (
+          <View>
+            {TodoArray.map((todos) => {
+              return (
+                <View key={todos.id}>
+                  <Text>{todos.title}</Text>
+                  <Text>{todos.body}</Text>
+                </View>
+              );
+            })}
+          </View>
+        )}
         <View
           style={{
+            flex: 1,
             position: 'relative',
-            transform: [{translateY: -(height - 1350)}],
             justifyContent: 'center',
             alignItems: 'center',
+            marginBottom: 20,
           }}>
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('Add', {title: title, body: body})
-            }
+            onPress={() => navigation.navigate('Add')}
             style={{
               backgroundColor: 'blue',
               justifyContent: 'center',
@@ -83,12 +93,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#666',
   },
-  scrollView: {},
   searchBar: {
     display: 'flex',
     flexDirection: 'row',
     borderRadius: 20,
     backgroundColor: '#e6e6e6',
+    alignItems: 'center',
+  },
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
   },
 });

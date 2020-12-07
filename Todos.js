@@ -1,1 +1,1 @@
-export default TodoArray = [{}];
+export default TodoArray = [];

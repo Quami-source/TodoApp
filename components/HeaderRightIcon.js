@@ -1,10 +1,15 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 
-const HeaderRightIcon = (props) => {
+const HeaderRightIcon = (...props) => {
+  console.log(props);
+
   return (
-    <View>
-      <Text>Icon here</Text>
+    <View style={{marginRight: 20}}>
+      <TouchableOpacity>
+        <Icon name="check" size={30} color="blue" />
+      </TouchableOpacity>
     </View>
   );
 };

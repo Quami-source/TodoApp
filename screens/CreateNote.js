@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {View, Text, TextInput, StyleSheet, Button} from 'react-native';
-import MyContext from '../components/MyContext';
+import {MyContext} from '../components/MyContext';
 
 const CreateNote = ({navigation}) => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
 
   const {addTodo} = React.useContext(MyContext);
   return (
@@ -15,6 +16,10 @@ const CreateNote = ({navigation}) => {
         placeholder="Tile"
         value={title}
         onChangeText={setTitle}
+        onKeyPress={(e) => {
+          setIsTyping(true);
+          addTodo();
+        }}
       />
       <TextInput
         style={{fontSize: 19}}
@@ -22,10 +27,10 @@ const CreateNote = ({navigation}) => {
         value={body}
         multiline
         onChangeText={setBody}
-      />
-      <Button
-        onPress={() => navigation.navigate('Home', {title: title, body: body})}
-        title="Add"
+        onKeyPress={(e) => {
+          setIsTyping(true);
+          addTodo();
+        }}
       />
     </View>
   );
