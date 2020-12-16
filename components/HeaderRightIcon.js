@@ -3,7 +3,7 @@ import {View, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const HeaderRightIcon = (...props) => {
-  console.log(props);
+  //console.log(props);
 
   return (
     <View style={{marginRight: 20}}>

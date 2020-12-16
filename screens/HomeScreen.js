@@ -28,41 +28,71 @@ const HomeScreen = ({route, navigation}, props) => {
     <SafeAreaView>
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
       <View style={styles.container}>
-        {TodoArray.length == 0 ? (
-          <View style={styles.imageContainer}>
-            <Image
-              source={require('../src/notetaking.gif')}
-              resizeMode="cover"
-            />
-          </View>
-        ) : (
-          <View>
-            {TodoArray.map((todos) => {
-              return (
-                <View key={todos.id}>
-                  <Text>{todos.title}</Text>
-                  <Text>{todos.body}</Text>
-                </View>
-              );
-            })}
-          </View>
-        )}
+        <View style={{flex: 2}}>
+          {TodoArray.length == 0 ? (
+            <View style={styles.imageContainer}>
+              <Image
+                source={require('../src/notetaking.gif')}
+                resizeMode="cover"
+              />
+            </View>
+          ) : (
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <View style={styles.searchBar}>
+                <Icon
+                  name="search"
+                  color="#ccc"
+                  size={25}
+                  style={{paddingLeft: 10}}
+                />
+                <Text style={{color: '#ccc', paddingLeft: 10, fontSize: 20}}>
+                  Search notes
+                </Text>
+              </View>
+
+              {TodoArray.map((todos, index) => {
+                return (
+                  <View
+                    key={index}
+                    style={{
+                      backgroundColor: '#eee',
+                      borderRadius: 10,
+                      marginBottom: 15,
+                    }}>
+                    <Text
+                      style={{
+                        fontWeight: '600',
+                        fontSize: 20,
+                        paddingTop: 10,
+                        paddingLeft: 10,
+                      }}>
+                      {todos.title}
+                    </Text>
+                    <Text style={{paddingLeft: 10, paddingBottom: 5}}>
+                      {todos.body}
+                    </Text>
+                  </View>
+                );
+              })}
+            </ScrollView>
+          )}
+        </View>
         <View
           style={{
             flex: 1,
             position: 'relative',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             alignItems: 'center',
             marginBottom: 20,
           }}>
           <TouchableOpacity
             onPress={() => navigation.navigate('Add')}
             style={{
-              backgroundColor: 'blue',
+              backgroundColor: '#0645FF',
               justifyContent: 'center',
               alignItems: 'center',
-              width: 80,
-              height: 80,
+              width: 60,
+              height: 60,
               borderRadius: 40,
               shadowColor: '#000',
               shadowOffset: {
@@ -94,10 +124,10 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   searchBar: {
-    display: 'flex',
     flexDirection: 'row',
     borderRadius: 20,
-    backgroundColor: '#e6e6e6',
+    marginBottom: 20,
+    backgroundColor: '#eee',
     alignItems: 'center',
   },
   imageContainer: {

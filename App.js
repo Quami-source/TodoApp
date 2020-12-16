@@ -1,18 +1,20 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Alert} from 'react-native';
 import {MyContext} from './components/MyContext';
 import HomeScreen from './screens/HomeScreen';
-import CreateNote from './screens/CreateNote';
+import {CreateNote, HeaderRightIcon} from './screens/CreateNote';
 import Header from './components/Header';
 import TodoArray from './Todos';
-import HeaderRightIcon from './components/HeaderRightIcon';
+
 import {compact} from 'lodash';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const Stack = createStackNavigator();
 
 const App = () => {
+  const [isTypingState, setIsTyping] = React.useState(false);
   const initialState = {
     isEmpty: true,
     isTyping: false,
@@ -78,13 +80,7 @@ const App = () => {
               },
             }}
           />
-          <Stack.Screen
-            name="Add"
-            component={CreateNote}
-            options={{
-              headerRight: (props) => <HeaderRightIcon {...props} />,
-            }}
-          />
+          <Stack.Screen name="Add" component={CreateNote} />
         </Stack.Navigator>
       </NavigationContainer>
     </MyContext.Provider>
