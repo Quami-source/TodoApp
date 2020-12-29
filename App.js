@@ -1,8 +1,9 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import {View, Text, Alert} from 'react-native';
 import {MyContext} from './components/MyContext';
 import HomeScreen from './screens/HomeScreen';
-import {CreateNote, HeaderRightIcon} from './screens/CreateNote';
+import {CreateStack, HeaderRightIcon} from './screens/CreateNote';
 import Header from './components/Header';
 import TodoArray from './Todos';
 
@@ -80,7 +81,7 @@ const App = () => {
               },
             }}
           />
-          <Stack.Screen name="Add" component={CreateNote} />
+          <Stack.Screen name="Add" component={CreateStack} />
         </Stack.Navigator>
       </NavigationContainer>
     </MyContext.Provider>
